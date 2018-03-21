@@ -3,3 +3,4 @@
 !*.sample.json
 Chat*
 !Chat.g4
+debug

@@ -5,10 +5,13 @@ import (
 	"fmt"
 	"io/ioutil"
 	"sync"
+
+	"github.com/nlopes/slack"
 )
 
 type config struct {
 	SlkToken string `json:"slackToken"`
+	api      *slack.Client
 }
 
 var (
@@ -21,6 +24,10 @@ func Config() *config {
 		aconfig = &config{}
 	})
 	return aconfig
+}
+
+func (config *config) SlackAPI() *slack.Client {
+	return aconfig.api
 }
 
 func (config *config) SlackToken() string {
@@ -39,6 +46,8 @@ func (config *config) Load(filename string) bool {
 		fmt.Println("Unable to parse config")
 		return false
 	}
+
+	config.api = slack.New(aconfig.SlkToken)
 
 	return true
 }
