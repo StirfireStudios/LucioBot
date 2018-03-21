@@ -1,0 +1,10 @@
+play a file
+play afile
+play afile junk
+start
+stop
+list
+status
+@chatbot play a file
+@chatbot play afile
+@chatbot status

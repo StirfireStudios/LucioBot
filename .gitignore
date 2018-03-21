@@ -1,0 +1,5 @@
+*.json
+*.exe
+!*.sample.json
+Chat*
+!Chat.g4
