@@ -2,5 +2,6 @@
 *.exe
 !*.sample.json
 Chat*
+!Chat_*.go
 !Chat.g4
 debug
