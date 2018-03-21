@@ -5,6 +5,6 @@ start
 stop
 list
 status
-@chatbot play a file
-@chatbot play afile
-@chatbot status
+<@U338S92ER> play a file
+<@U338S92ER> play afile
+<@U338S92ER> status

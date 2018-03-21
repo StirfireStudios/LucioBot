@@ -9,25 +9,6 @@ import (
 
 var queue string
 
-func handleMessage(msg *slack.MessageEvent) {
-	if msg.Type != "message" {
-		return
-	}
-
-	if msg.Hidden {
-		return
-	}
-
-	if len(msg.Text) == 0 {
-		return
-	}
-
-	private := ChannelIsPrivate(msg.Channel)
-	_ = private
-
-	fmt.Printf("Message: %s\n", msg.Text)
-}
-
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	if !Config().Load("config.json") {
@@ -41,6 +22,9 @@ func main() {
 		switch msg.Data.(type) {
 		case *slack.MessageEvent:
 			handleMessage(msg.Data.(*slack.MessageEvent))
+
+		case *slack.ConnectedEvent:
+			handleConnection(msg.Data.(*slack.ConnectedEvent))
 
 		case *slack.InvalidAuthEvent:
 			fmt.Printf("Invalid credentials\n")

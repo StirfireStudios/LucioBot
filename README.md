@@ -17,6 +17,7 @@ You will need a [properly setup](https://golang.org/doc/install) Go development 
 Once you have your GOPATH setup as above you should:
 
   1. `go get -u github.com/nlopes/slack`
+  2. `go get -u github.com/antlr/antlr4/runtime/Go/antlr`
 
 once you have all those, you should create a config file from the `config.sample.json` template.
 Ensure you have your slack Token and some audio files ready to play!

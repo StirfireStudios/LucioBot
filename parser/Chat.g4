@@ -44,6 +44,7 @@ STATUS  : S T A T U S;
 
 // fragments
 
+USERIDENTIFIER  : '@' [a-zA-Z0-9]*;      
 WORD            : (LOWERCASE | UPPERCASE | '_')+ ;
 WHITESPACE      : (' ' | '\t') ;
 NEWLINE         : ('\r'? '\n' | '\r')+ ;
@@ -54,8 +55,8 @@ TEXT            : ('['|'(') .*? (']'|')');
  */
 
 chat            : line+ EOF ;
-line            : (mention WHITESPACE)* command NEWLINE;
+line            : (mention WHITESPACE)* command (NEWLINE)*;
 command         : (paramCommand | singleCommand);
 paramCommand    : (PLAY) WHITESPACE WORD;
 singleCommand   : (SAY | STOP | LIST | STATUS);
-mention         : '@' WORD ;
+mention         : '<@'USERIDENTIFIER'>' ;
