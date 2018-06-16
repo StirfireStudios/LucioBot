@@ -17,6 +17,7 @@ const (
 	Say
 	Stop
 	Status
+	Help
 )
 
 var (
@@ -44,21 +45,21 @@ func handleConnection(msg *slack.ConnectedEvent) {
 	myUserID = msg.Info.User.ID
 }
 
-func handleMessage(msg *slack.MessageEvent) {
+func handleMessage(msg *slack.MessageEvent) *messageListener {
 	if msg.Type != "message" {
-		return
+		return nil
 	}
 
 	if msg.User == myUserID || len(msg.User) == 0 {
-		return
+		return nil
 	}
 
 	if msg.Hidden {
-		return
+		return nil
 	}
 
 	if len(msg.Text) == 0 {
-		return
+		return nil
 	}
 
 	parsedMsg := messageListener{
@@ -78,12 +79,15 @@ func handleMessage(msg *slack.MessageEvent) {
 	if !parsedMsg.ForMe() {
 		fmt.Printf("Message '%s' was not for me\n", msg.Text)
 		fmt.Printf("%#v\n", parsedMsg)
-		return
+		return nil
 	}
 
 	if parsedMsg.err {
 		replyError(msg)
+		return nil
 	}
+
+	return &parsedMsg
 }
 
 func (msg *messageListener) ForMe() bool {
@@ -96,6 +100,23 @@ func (msg *messageListener) ForMe() bool {
 	}
 
 	return false
+}
+
+func (msg *messageListener) String() string {
+	switch msg.command {
+	case Play:
+		return fmt.Sprintf("Play: %s", msg.filename)
+	case Say:
+		return "Say a thing"
+	case Stop:
+		return "Stop Playing"
+	case Status:
+		return "Give status"
+	case List:
+		return "List Files"
+	}
+
+	return "Unknown command"
 }
 
 func getCommand(node antlr.TerminalNode) command {

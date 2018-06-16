@@ -41,6 +41,7 @@ LIST    : L I S T ;
 SAY     : S A Y ; 
 STOP    : S T O P;
 STATUS  : S T A T U S;
+HELP    : H E L P;
 
 // fragments
 
@@ -58,5 +59,5 @@ chat            : line+ EOF ;
 line            : (mention WHITESPACE)* command (NEWLINE)*;
 command         : (paramCommand | singleCommand);
 paramCommand    : (PLAY) WHITESPACE WORD;
-singleCommand   : (SAY | STOP | LIST | STATUS);
+singleCommand   : (SAY | STOP | LIST | STATUS | HELP);
 mention         : '<@'USERIDENTIFIER'>' ;

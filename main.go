@@ -21,7 +21,10 @@ func main() {
 	for msg := range rtm.IncomingEvents {
 		switch msg.Data.(type) {
 		case *slack.MessageEvent:
-			handleMessage(msg.Data.(*slack.MessageEvent))
+			msg := handleMessage(msg.Data.(*slack.MessageEvent))
+			if msg != nil {
+				runCommand(msg)
+			}
 
 		case *slack.ConnectedEvent:
 			handleConnection(msg.Data.(*slack.ConnectedEvent))
