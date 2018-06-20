@@ -11,6 +11,7 @@ import (
 
 type config struct {
 	SlkToken string `json:"slackToken"`
+	AudioDir string
 	api      *slack.Client
 }
 
@@ -48,6 +49,7 @@ func (config *config) Load(filename string) bool {
 	}
 
 	config.api = slack.New(aconfig.SlkToken)
+	config.AudioDir = "audio"
 
 	return true
 }
