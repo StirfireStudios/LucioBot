@@ -1,7 +1,15 @@
 package main
 
-function runCommandPlay(string *filename) {
-	
+import (
+	"fmt"
+)
+
+func handlePlay(filename string) {
+	fmt.Printf("Play: %s", filename)
+}
+
+func handleList() {
+	fmt.Printf("List")
 }
 
 func runCommand(command *messageListener) {

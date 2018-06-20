@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"./parser"
+	"github.com/StirfireStudios/LucioBot/parser"
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 	"github.com/nlopes/slack"
 )
